@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Plaza Prod | Producción audiovisual y experiencias en vivo</title>
+    <meta name="description" content="La Plaza Prod — productora audiovisual especializada en eventos en vivo, videoclips y streaming profesional. Diseñamos experiencias sonoras y visuales con rigor técnico y mirada artística.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepBlack: '#0B0C10',
+                        warmGray: '#1F2933',
+                        amberAccent: '#F59E0B',
+                        cyanAccent: '#26A6D6',
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                        mono: ['"Roboto Mono"', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'hero-gradient': 'linear-gradient(to bottom, rgba(11, 12, 16, 0.3) 0%, rgba(11, 12, 16, 1) 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for smooth reveals and minor tweaks */
+        body {
+            background-color: #0B0C10;
+            color: #FFFFFF;
+        }
+        .glass-nav {
+            background: rgba(11, 12, 16, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-glow-amber {
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-amberAccent selection:text-deepBlack">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Usamos el nombre exacto de tu archivo -->
+                <img src="LA PLAZA Logo - Original with Transparent Background - 5000x5000.jpg" alt="La Plaza Prod Logo" class="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-10 font-mono text-sm tracking-widest text-gray-300 uppercase">
+                <a href="#servicios" class="hover:text-amberAccent transition-colors">Servicios</a>
+                <a href="#portfolio" class="hover:text-amberAccent transition-colors">Portfolio</a>
+                <a href="#nosotros" class="hover:text-amberAccent transition-colors">Nosotros</a>
+                <a href="#contacto" class="border border-cyanAccent text-cyanAccent px-5 py-2 hover:bg-cyanAccent hover:text-deepBlack transition-colors duration-300">
+                    Presupuesto
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-2xl focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-warmGray border-t border-gray-800">
+            <div class="flex flex-col px-6 py-6 gap-6 font-mono text-sm tracking-widest uppercase text-center">
+                <a href="#servicios" class="text-gray-300 hover:text-amberAccent" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Servicios</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-amberAccent" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Portfolio</a>
+                <a href="#nosotros" class="text-gray-300 hover:text-amberAccent" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Nosotros</a>
+                <a href="#contacto" class="text-cyanAccent border border-cyanAccent py-3 mx-4" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Presupuesto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Video Placeholder -->
+        <div class="absolute inset-0 w-full h-full z-0">
+            <!-- Aquí iría tu video mp4: <video autoplay loop muted playsinline class="object-cover w-full h-full opacity-40"><source src="showreel.mp4" type="video/mp4"></video> -->
+            <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1598387181032-a310322db5b3?q=80&w=2076&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
+            <div class="absolute inset-0 bg-hero-gradient"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-12 text-center mt-20">
+            <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8">
+                La Plaza Prod
+                <span class="block text-2xl md:text-4xl lg:text-5xl font-normal italic text-gray-300 mt-4">Producción audiovisual y experiencias en vivo</span>
+            </h1>
+            
+            <p class="font-body text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
+                Diseñamos climas sonoros y visuales: videoclips, streaming profesional y shows. <br class="hidden md:block">
+                <span class="text-white font-medium">Técnica y emoción en cada detalle.</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#portfolio" class="w-full sm:w-auto bg-amberAccent text-deepBlack font-bold uppercase tracking-wider px-8 py-4 hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="ph-fill ph-play-circle text-xl"></i> Ver Showreel
+                </a>
+                <a href="#contacto" class="w-full sm:w-auto border-2 border-white text-white font-bold uppercase tracking-wider px-8 py-4 hover:bg-white hover:text-deepBlack transition-all duration-300">
+                    Solicitar Presupuesto
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pilares / Servicios -->
+    <section id="servicios" class="py-32 px-6 lg:px-12 bg-deepBlack">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="font-mono text-cyanAccent tracking-widest uppercase text-sm mb-4">Lo que hacemos</h2>
+                <h3 class="font-heading text-4xl md:text-5xl font-bold">Viví la música como experiencia</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+                <!-- Servicio 1 -->
+                <div class="bg-warmGray p-10 lg:p-12 border-t-2 border-transparent hover:border-amberAccent transition-colors duration-500 flex flex-col h-full group">
+                    <i class="ph ph-speaker-hifi text-5xl text-amberAccent mb-8 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-heading text-2xl font-bold mb-4">Eventos en Vivo</h4>
+                    <p class="text-gray-400 font-light leading-relaxed mb-8 flex-grow">
+                        Producción integral para shows íntimos y festivales. Diseño de iluminación, sonido inmersivo y pantallas sincronizadas. Diseñamos climas, no solo shows.
+                    </p>
+                    <ul class="font-mono text-xs text-gray-500 space-y-2 uppercase tracking-wide">
+                        <li>— Dirección Artística</li>
+                        <li>— Sonido & Luces</li>
+                        <li>— Stage Management</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="bg-warmGray p-10 lg:p-12 border-t-2 border-transparent hover:border-cyanAccent transition-colors duration-500 flex flex-col h-full group">
+                    <i class="ph ph-broadcast text-5xl text-cyanAccent mb-8 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-heading text-2xl font-bold mb-4">Streaming Profesional</h4>
+                    <p class="text-gray-400 font-light leading-relaxed mb-8 flex-grow">
+                        Transmisiones en vivo con calidad cinematográfica. Soluciones robustas para plataformas y festivales con latencia ultrabaja y rigor técnico.
+                    </p>
+                    <ul class="font-mono text-xs text-gray-500 space-y-2 uppercase tracking-wide">
+                        <li>— Multi-cámara</li>
+                        <li>— Integración OBS / RTMP</li>
+                        <li>— Soporte Técnico (AlmaExon)</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="bg-warmGray p-10 lg:p-12 border-t-2 border-transparent hover:border-amberAccent transition-colors duration-500 flex flex-col h-full group">
+                    <i class="ph ph-film-strip text-5xl text-amberAccent mb-8 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-heading text-2xl font-bold mb-4">Audiovisual & Clips</h4>
+                    <p class="text-gray-400 font-light leading-relaxed mb-8 flex-grow">
+                        Producción de videoclips y contenido para marcas. Desde el guion y rodaje hasta el color grading y postproducción final.
+                    </p>
+                    <ul class="font-mono text-xs text-gray-500 space-y-2 uppercase tracking-wide">
+                        <li>— Videoclips</li>
+                        <li>— Color Grading</li>
+                        <li>— Social & Marketing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Proyectos (Case Studies) -->
+    <section id="portfolio" class="py-32 px-6 lg:px-12 bg-warmGray">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div>
+                    <h2 class="font-mono text-amberAccent tracking-widest uppercase text-sm mb-4">Proyectos Destacados</h2>
+                    <h3 class="font-heading text-4xl md:text-5xl font-bold">Producción que suena, <br class="hidden md:block">mira y emociona.</h3>
+                </div>
+                <a href="#" class="font-mono text-sm text-cyanAccent border-b border-cyanAccent pb-1 hover:text-white hover:border-white transition-colors">
+                    Ver portfolio completo <i class="ph ph-arrow-right inline-block ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Proyecto 1 (Grande) -->
+                <div class="project-card relative group cursor-pointer overflow-hidden lg:col-span-2 aspect-video lg:aspect-[21/9] bg-deepBlack">
+                    <img src="https://images.unsplash.com/photo-1540039155732-d674d40d4e32?q=80&w=2070&auto=format&fit=crop" alt="Concierto en vivo" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-deepBlack via-deepBlack/50 to-transparent"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-8 lg:p-12 w-full">
+                        <div class="flex gap-3 mb-4 font-mono text-xs uppercase tracking-wider text-amberAccent">
+                            <span>Live Show</span>
+                            <span class="text-gray-500">•</span>
+                            <span>2025</span>
+                        </div>
+                        <h4 class="font-heading text-3xl md:text-5xl font-bold mb-3">Festival Contravisual</h4>
+                        <p class="text-gray-300 font-light max-w-2xl mb-6 hidden md:block">Producción técnica integral, diseño de iluminación y circuito cerrado de cámaras para más de 5,000 asistentes.</p>
+                        <span class="inline-block border border-white px-6 py-2 text-sm uppercase tracking-widest hover:bg-white hover:text-deepBlack transition-colors">Ver Case Study</span>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="project-card relative group cursor-pointer overflow-hidden aspect-square md:aspect-[4/3] bg-deepBlack">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop" alt="Grabación de Videoclip" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-deepBlack to-transparent"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <div class="flex gap-3 mb-3 font-mono text-xs uppercase tracking-wider text-cyanAccent">
+                            <span>Videoclip</span>
+                            <span class="text-gray-500">•</span>
+                            <span>Martín Tarantino</span>
+                        </div>
+                        <h4 class="font-heading text-2xl md:text-3xl font-bold mb-4">Sesión Acústica</h4>
+                        <span class="inline-block border border-white px-5 py-2 text-xs uppercase tracking-widest hover:bg-white hover:text-deepBlack transition-colors">Play Video</span>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="project-card relative group cursor-pointer overflow-hidden aspect-square md:aspect-[4/3] bg-deepBlack">
+                    <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?q=80&w=2058&auto=format&fit=crop" alt="Consola de Streaming" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-deepBlack to-transparent"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <div class="flex gap-3 mb-3 font-mono text-xs uppercase tracking-wider text-amberAccent">
+                            <span>Streaming</span>
+                            <span class="text-gray-500">•</span>
+                            <span>Corporativo</span>
+                        </div>
+                        <h4 class="font-heading text-2xl md:text-3xl font-bold mb-4">Lanzamiento Marca Global</h4>
+                        <span class="inline-block border border-white px-5 py-2 text-xs uppercase tracking-widest hover:bg-white hover:text-deepBlack transition-colors">Ver Detalles</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners / Sobre Nosotros -->
+    <section id="nosotros" class="py-24 px-6 border-y border-gray-800 bg-deepBlack">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+            <div class="md:w-1/2">
+                <h2 class="font-heading text-3xl font-bold mb-6">El ecosistema La Plaza Prod</h2>
+                <p class="text-gray-400 font-light leading-relaxed mb-6">
+                    No trabajamos solos. Nuestro equipo emergente colabora estrechamente con nuestras empresas hermanas para garantizar la mayor calidad en cada etapa del proceso, desde la conceptualización hasta la ejecución técnica.
+                </p>
+                <a href="#" class="text-cyanAccent hover:text-white transition-colors flex items-center gap-2 font-mono text-sm uppercase tracking-wider">
+                    Descargar Press Kit <i class="ph ph-download-simple"></i>
+                </a>
+            </div>
+            <div class="md:w-1/2 flex flex-col sm:flex-row gap-8 items-center justify-center lg:justify-end opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Falso logo Contravisual -->
+                <div class="text-2xl font-heading font-bold text-gray-300 tracking-tighter">
+                    CONTRAVISUAL <br><span class="text-xs font-mono uppercase tracking-widest text-gray-500">Media Group</span>
+                </div>
+                <!-- Falso logo AlmaExon -->
+                <div class="text-2xl font-mono font-bold text-gray-300">
+                    <span class="text-cyanAccent">&lt;</span>AlmaExon<span class="text-cyanAccent">/&gt;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto / CTA -->
+    <section id="contacto" class="py-32 px-6 lg:px-12 bg-hero-gradient relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-amberAccent/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-cyanAccent/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="font-heading text-4xl md:text-6xl font-bold mb-8">¿Listo para subir el nivel de tu proyecto?</h2>
+            <p class="font-body text-xl text-gray-300 mb-12 font-light">
+                Agendá una consultoría técnica o contanos sobre tu próximo evento o videoclip.
+            </p>
+
+            <div class="bg-warmGray p-8 md:p-12 text-left shadow-2xl border border-gray-800">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block font-mono text-xs text-gray-400 uppercase tracking-widest mb-2">Nombre</label>
+                            <input type="text" class="w-full bg-deepBlack border border-gray-700 p-4 text-white focus:outline-none focus:border-amberAccent transition-colors" placeholder="Tu nombre o empresa">
+                        </div>
+                        <div>
+                            <label class="block font-mono text-xs text-gray-400 uppercase tracking-widest mb-2">Email</label>
+                            <input type="email" class="w-full bg-deepBlack border border-gray-700 p-4 text-white focus:outline-none focus:border-amberAccent transition-colors" placeholder="hola@ejemplo.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-mono text-xs text-gray-400 uppercase tracking-widest mb-2">Tipo de Proyecto</label>
+                        <select class="w-full bg-deepBlack border border-gray-700 p-4 text-gray-300 focus:outline-none focus:border-amberAccent transition-colors appearance-none">
+                            <option>Producción de Videoclip</option>
+                            <option>Evento en Vivo / Recital</option>
+                            <option>Streaming Profesional</option>
+                            <option>Postproducción / Color Grading</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-mono text-xs text-gray-400 uppercase tracking-widest mb-2">Mensaje</label>
+                        <textarea rows="4" class="w-full bg-deepBlack border border-gray-700 p-4 text-white focus:outline-none focus:border-amberAccent transition-colors" placeholder="Contanos brevemente qué necesitas..."></textarea>
+                    </div>
+                    <button type="button" class="w-full bg-amberAccent text-deepBlack font-bold uppercase tracking-wider py-5 hover:bg-yellow-400 transition-colors flex justify-center items-center gap-2">
+                        Reservar Consultoría Técnica <i class="ph ph-paper-plane-right text-xl"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="mt-12">
+                <a href="https://wa.me/5491100000000" target="_blank" class="inline-flex items-center gap-2 text-gray-400 hover:text-green-500 transition-colors">
+                    <i class="ph ph-whatsapp-logo text-2xl"></i> O escribinos directo por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deepBlack border-t border-gray-900 py-12 px-6 lg:px-12 text-center md:text-left">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <img src="LA PLAZA Logo - Original with Transparent Background - 5000x5000.jpg" alt="La Plaza Prod" class="h-8 mx-auto md:mx-0 mb-4">
+                <p class="text-gray-500 text-sm font-light">© 2026 La Plaza Prod. Todos los derechos reservados.</p>
+            </div>
+            
+            <div class="flex gap-6 text-2xl text-gray-400">
+                <a href="#" class="hover:text-amberAccent transition-colors"><i class="ph ph-instagram-logo"></i></a>
+                <a href="#" class="hover:text-amberAccent transition-colors"><i class="ph ph-youtube-logo"></i></a>
+                <a href="#" class="hover:text-cyanAccent transition-colors"><i class="ph ph-vimeo-logo"></i></a>
+                <a href="#" class="hover:text-cyanAccent transition-colors"><i class="ph ph-linkedin-logo"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button (Mobile) -->
+    <a href="https://wa.me/5491100000000" target="_blank" class="md:hidden fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg z-50 hover:bg-green-600 transition-colors flex items-center justify-center">
+        <i class="ph ph-whatsapp-logo text-3xl"></i>
+    </a>
+
+</body>
+</html>
