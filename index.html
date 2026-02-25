@@ -67,8 +67,8 @@
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group">
-                <!-- Aumentamos el tamaño a h-20 en móvil y h-24 en desktop -->
-                <img src="Logo.png" alt="La Plaza Prod Logo" class="h-20 md:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                <!-- Truco de escalado: Multiplicamos el tamaño visual sin romper el menú -->
+                <img src="Logo.png" alt="La Plaza Prod Logo" class="h-20 md:h-24 w-auto object-contain transition-transform duration-300 scale-[2] md:scale-[2.5] origin-left">
             </a>
             
             <!-- Desktop Menu -->
@@ -230,21 +230,21 @@
                     </div>
                 </div>
 
-                <!-- Proyecto 3 -->
-                <div class="project-card relative group cursor-pointer overflow-hidden aspect-square md:aspect-[4/3] bg-deepBlack">
-                    <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?q=80&w=2058&auto=format&fit=crop" alt="Consola de Streaming" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700">
+                <!-- Proyecto 3 (Link a El Encuentro) -->
+                <a href="encuentro.html" class="project-card relative block group cursor-pointer overflow-hidden aspect-square md:aspect-[4/3] bg-deepBlack border border-gray-800 hover:border-amberAccent transition-colors duration-500">
+                    <img src="https://images.unsplash.com/photo-1509204094154-18cdd3c62fdf?q=80&w=1974&auto=format&fit=crop" alt="El Encuentro" class="w-full h-full object-cover opacity-50 group-hover:scale-105 group-hover:opacity-40 grayscale transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-deepBlack to-transparent"></div>
                     
                     <div class="absolute bottom-0 left-0 p-8 w-full">
                         <div class="flex gap-3 mb-3 font-mono text-xs uppercase tracking-wider text-amberAccent">
-                            <span>Streaming</span>
+                            <span>Experiencia</span>
                             <span class="text-gray-500">•</span>
-                            <span>Corporativo</span>
+                            <span>Ritual</span>
                         </div>
-                        <h4 class="font-heading text-2xl md:text-3xl font-bold mb-4">Lanzamiento Marca Global</h4>
-                        <span class="inline-block border border-white px-5 py-2 text-xs uppercase tracking-widest hover:bg-white hover:text-deepBlack transition-colors">Ver Detalles</span>
+                        <h4 class="font-heading text-2xl md:text-3xl font-bold mb-4">El Encuentro</h4>
+                        <span class="inline-block border border-amberAccent text-amberAccent px-5 py-2 text-xs uppercase tracking-widest group-hover:bg-amberAccent group-hover:text-deepBlack transition-colors">Ver Detalles</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -319,7 +319,7 @@
             </div>
             
             <div class="mt-12">
-                <a href="https://wa.me/5491100000000" target="_blank" class="inline-flex items-center gap-2 text-gray-400 hover:text-green-500 transition-colors">
+                <a href="https://wa.me/5491154198091" target="_blank" class="inline-flex items-center gap-2 text-gray-400 hover:text-green-500 transition-colors">
                     <i class="ph ph-whatsapp-logo text-2xl"></i> O escribinos directo por WhatsApp
                 </a>
             </div>
@@ -330,7 +330,8 @@
     <footer class="bg-deepBlack border-t border-gray-900 py-12 px-6 lg:px-12 text-center md:text-left">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div>
-                <img src="Logo.png" alt="La Plaza Prod" class="h-12 mx-auto md:mx-0 mb-4">
+                <!-- También aumentamos visualmente el logo del footer -->
+                <img src="Logo.png" alt="La Plaza Prod" class="h-12 mx-auto md:mx-0 mb-4 scale-150 origin-center md:origin-left">
                 <p class="text-gray-500 text-sm font-light">© 2026 La Plaza Prod. Todos los derechos reservados.</p>
             </div>
             
@@ -349,6 +350,4 @@
     </a>
 
 </body>
-
 </html>
-
