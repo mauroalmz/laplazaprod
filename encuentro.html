@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Encuentro | Una experiencia musical íntima</title>
+    <meta name="description" content="Una experiencia musical íntima y de alto impacto emocional. Un ritual moderno de sonido y silencio para audiencias reducidas.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons (Minimalist use) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        carbonBlack: '#0a0a0a', /* Aún más profundo */
+                        warmDark: '#141414',
+                        ochreAccent: '#C0904D',
+                        offWhite: '#EAEAE5', /* Un poco más cálido/apagado para no encandilar */
+                        mutedText: '#737373',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-fade': 'linear-gradient(to bottom, rgba(10, 10, 10, 0.2) 0%, rgba(10, 10, 10, 1) 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #EAEAE5;
+            overflow-x: hidden;
+        }
+        /* Scrollbar elegante */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C0904D; 
+        }
+        
+        /* Efecto de grano analógico (Film Grain) para textura táctil */
+        .bg-noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02; /* Reducido al mínimo para que sea sutil y no parezca pared */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Halo interactivo sutil (Spotlight) */
+        #ambient-glow {
+            transition: opacity 2s ease;
+            background: radial-gradient(circle 800px at 50% 50%, rgba(192, 144, 77, 0.03), transparent 70%);
+        }
+
+        /* Animaciones lentas para las luces difuminadas (Bokeh) */
+        @keyframes float-light-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(4%, 8%) scale(1.05); opacity: 0.8; }
+        }
+        @keyframes float-light-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-4%, -4%) scale(1.02); opacity: 0.7; }
+        }
+
+        /* Animaciones poéticas al hacer scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay { transition-delay: 0.3s; }
+        .reveal-delay-2 { transition-delay: 0.6s; }
+
+        /* Estilo sutil de checkboxes */
+        .checkbox-custom:checked {
+            background-color: #C0904D;
+            border-color: #C0904D;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-ochreAccent selection:text-carbonBlack">
+
+    <!-- Capa de textura analógica (Granulado visual) -->
+    <div class="bg-noise"></div>
+    
+    <!-- Halo interactivo (reacciona al mouse vía JS) -->
+    <div id="ambient-glow" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Minimalist Nav -->
+    <nav class="fixed w-full z-50 mix-blend-difference py-6 px-6 lg:px-12 transition-all duration-300">
+        <div class="max-w-4xl mx-auto flex justify-between items-center reveal active">
+            <div class="font-serif text-xl tracking-widest text-offWhite opacity-80">
+                EL ENCUENTRO
+            </div>
+            <a href="#inscripcion" class="text-xs tracking-widest uppercase font-sans text-ochreAccent hover:text-offWhite transition-colors duration-500">
+                Lista de espera
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background: Oscuro profundo con luces difuminadas (CSS Bokeh) -->
+        <div class="absolute inset-0 z-0 bg-carbonBlack overflow-hidden">
+            <!-- Luz difuminada 1 (Cálida, Arriba Izquierda) -->
+            <div class="absolute top-[-15%] left-[-10%] w-[60vw] h-[60vw] bg-ochreAccent/10 rounded-full blur-[130px] mix-blend-screen" style="animation: float-light-1 22s ease-in-out infinite;"></div>
+            
+            <!-- Luz difuminada 2 (Más oscura/Tierra, Abajo Derecha) -->
+            <div class="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-[#8B5A2B]/10 rounded-full blur-[150px] mix-blend-screen" style="animation: float-light-2 28s ease-in-out infinite;"></div>
+            
+            <div class="absolute inset-0 bg-hero-fade"></div>
+            <!-- Viñeta oscura en los bordes para potenciar la intimidad central -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0a0a0a_100%)] opacity-90"></div>
+        </div>
+
+        <div class="relative z-10 max-w-3xl mx-auto px-6 text-center reveal active">
+            <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-8 text-offWhite drop-shadow-2xl">
+                No venís a escuchar música.<br>
+                <span class="italic text-ochreAccent opacity-90">Venís a atravesar algo.</span>
+            </h1>
+            
+            <p class="font-sans text-lg text-mutedText max-w-xl mx-auto mb-16 font-light tracking-wide reveal active reveal-delay">
+                Un encuentro íntimo para 40 personas. Un ritual moderno donde el silencio es tan importante como el sonido.
+            </p>
+
+            <div class="reveal active reveal-delay-2">
+                <a href="#inscripcion" class="inline-block border border-ochreAccent/50 text-ochreAccent font-sans text-xs uppercase tracking-[0.2em] px-10 py-4 hover:bg-ochreAccent hover:text-carbonBlack hover:border-ochreAccent transition-all duration-700">
+                    Entrar a la lista
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Qué es (Concepto) -->
+    <section class="py-40 px-6 lg:px-12 bg-carbonBlack relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-serif text-3xl md:text-4xl font-light mb-12 text-ochreAccent opacity-80 reveal">La Intención</h2>
+            <div class="space-y-10 font-sans text-lg text-mutedText font-light leading-relaxed">
+                <p class="reveal">
+                    Esto no es un recital, ni un espectáculo. Es un espacio diseñado para la pausa. Construimos un clima de presencia absoluta al que responden intervenciones musicales acústicas y envolventes.
+                </p>
+                <p class="reveal">
+                    Nos alejamos del entretenimiento masivo para volver a la raíz: la vulnerabilidad compartida. Una voz humana que guía, textos que resuenan y músicos con sensibilidad lírica capaces de sostener atmósferas densas y frágiles a la vez.
+                </p>
+                <div class="pt-12 mt-12 border-t border-white/5 reveal">
+                    <h3 class="font-serif text-2xl text-offWhite/80 mb-6">Límites y Ética</h3>
+                    <p class="text-sm opacity-70">
+                        Somos transparentes: esta es una experiencia artística y emocional. No ofrecemos terapias, liturgias religiosas ni promesas de sanación. Es, simplemente, un refugio sonoro seguro para sentir.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo se vive (Dinámica) -->
+    <section class="py-40 px-6 lg:px-12 bg-warmDark relative z-10 border-y border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-3xl md:text-4xl font-light mb-20 text-center text-offWhite opacity-90 reveal">Cómo se vive</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+                <div class="reveal">
+                    <i class="ph ph-speaker-none text-4xl text-ochreAccent/60 mb-8 font-light"></i>
+                    <h4 class="font-serif text-xl mb-4 text-offWhite/90 tracking-wide">Silencio Radical</h4>
+                    <p class="font-sans text-sm text-mutedText font-light leading-relaxed">
+                        Apagamos los teléfonos. Proponemos una desconexión total del exterior para poder conectar con la densidad del espacio.
+                    </p>
+                </div>
+                <div class="reveal reveal-delay">
+                    <i class="ph ph-hourglass-low text-4xl text-ochreAccent/60 mb-8 font-light"></i>
+                    <h4 class="font-serif text-xl mb-4 text-offWhite/90 tracking-wide">Tiempo Suspendido</h4>
+                    <p class="font-sans text-sm text-mutedText font-light leading-relaxed">
+                        La experiencia tiene una duración controlada y un desarrollo orgánico. Capacidad estrictamente limitada para preservar la intimidad.
+                    </p>
+                </div>
+                <div class="reveal reveal-delay-2">
+                    <i class="ph ph-eye-closed text-4xl text-ochreAccent/60 mb-8 font-light"></i>
+                    <h4 class="font-serif text-xl mb-4 text-offWhite/90 tracking-wide">Disposición</h4>
+                    <p class="font-sans text-sm text-mutedText font-light leading-relaxed">
+                        No hay escenario elevado ni barreras. Vení con ropa cómoda. Solo traé tu presencia y disposición para la escucha profunda.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mediateca (Spoiler Controlado) -->
+    <section class="py-40 px-6 lg:px-12 bg-carbonBlack relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-3xl md:text-4xl font-light mb-6 text-center text-ochreAccent opacity-80 reveal">Archivo Documental</h2>
+            <p class="text-center font-sans text-sm text-mutedText mb-20 font-light reveal">Fragmentos visuales de ediciones previas. (Audio apagado por defecto).</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+                <!-- Imagen 1 -->
+                <div class="aspect-[4/5] bg-warmDark relative group overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1509204094154-18cdd3c62fdf?q=80&w=1974&auto=format&fit=crop" alt="Siluetas en la oscuridad" class="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-105 transition-all duration-[1.5s]">
+                </div>
+                <!-- Imagen 2 -->
+                <div class="aspect-[4/5] bg-warmDark relative group overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2069&auto=format&fit=crop" alt="Detalle de instrumento" class="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-105 transition-all duration-[1.5s]">
+                </div>
+                <!-- Video/Clip -->
+                <div class="aspect-[4/5] bg-warmDark relative group overflow-hidden flex items-center justify-center cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a1a2a5f3cb06?q=80&w=2070&auto=format&fit=crop" alt="Textura sonora" class="w-full h-full object-cover opacity-30 group-hover:opacity-20 transition-all duration-[1.5s] absolute inset-0 grayscale">
+                    <div class="relative z-10 w-16 h-16 rounded-full border border-ochreAccent/50 flex items-center justify-center text-ochreAccent/80 group-hover:border-ochreAccent group-hover:text-ochreAccent transition-all duration-700">
+                        <i class="ph-fill ph-play text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inscripción / Lista de Espera -->
+    <section id="inscripcion" class="py-40 px-6 lg:px-12 bg-warmDark relative z-10 border-t border-white/5">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-3xl md:text-4xl font-light mb-6 text-offWhite opacity-90">Solicitar Acceso</h2>
+                <p class="font-sans text-mutedText font-light text-sm leading-relaxed max-w-lg mx-auto">
+                    Debido a la naturaleza frágil y cuidada del evento, los cupos son estrictamente limitados (máx. 40 personas). Completá el formulario para ingresar a la lista de reserva.
+                </p>
+            </div>
+
+            <form class="space-y-10 reveal reveal-delay">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                        <input type="text" id="nombre" class="w-full bg-transparent border-b border-white/10 p-4 text-offWhite focus:outline-none focus:border-ochreAccent/70 transition-colors placeholder-white/20 font-sans text-sm" placeholder="Tu nombre">
+                    </div>
+                    <div>
+                        <input type="email" id="email" class="w-full bg-transparent border-b border-white/10 p-4 text-offWhite focus:outline-none focus:border-ochreAccent/70 transition-colors placeholder-white/20 font-sans text-sm" placeholder="Tu correo electrónico">
+                    </div>
+                </div>
+                
+                <div>
+                    <textarea id="motivo" rows="2" class="w-full bg-transparent border-b border-white/10 p-4 text-offWhite focus:outline-none focus:border-ochreAccent/70 transition-colors placeholder-white/20 font-sans text-sm resize-none" placeholder="¿Qué te trae a buscar esta experiencia? (Opcional)"></textarea>
+                </div>
+
+                <!-- Checkboxes de Consentimiento y Ética -->
+                <div class="space-y-6 pt-6">
+                    <label class="flex items-start gap-4 cursor-pointer group">
+                        <input type="checkbox" class="mt-1 w-4 h-4 checkbox-custom appearance-none border border-white/20 rounded-sm checked:bg-ochreAccent focus:ring-0 transition-colors cursor-pointer relative after:content-['✓'] after:absolute after:text-carbonBlack after:text-xs after:font-bold after:left-[2px] after:top-[-1px] after:opacity-0 checked:after:opacity-100">
+                        <span class="font-sans text-xs text-mutedText/80 font-light leading-relaxed group-hover:text-mutedText transition-colors">
+                            Entiendo que esto es una experiencia artística y cultural. Comprendo que no se ofrecen prácticas terapéuticas ni médicas.
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start gap-4 cursor-pointer group">
+                        <input type="checkbox" class="mt-1 w-4 h-4 checkbox-custom appearance-none border border-white/20 rounded-sm checked:bg-ochreAccent focus:ring-0 transition-colors cursor-pointer relative after:content-['✓'] after:absolute after:text-carbonBlack after:text-xs after:font-bold after:left-[2px] after:top-[-1px] after:opacity-0 checked:after:opacity-100">
+                        <span class="font-sans text-xs text-mutedText/80 font-light leading-relaxed group-hover:text-mutedText transition-colors">
+                            Acepto la política de privacidad y doy mi consentimiento para el uso de imagen (registro documental no invasivo). <span class="italic block mt-2 opacity-60">Nota: Al confirmar asistencia, podrás solicitar explícitamente no ser filmado/a.</span>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="pt-10 text-center">
+                    <button type="button" class="bg-offWhite/90 text-carbonBlack font-sans text-xs uppercase tracking-[0.2em] px-12 py-5 hover:bg-ochreAccent hover:text-carbonBlack transition-all duration-700 w-full md:w-auto">
+                        Ingresar a la Lista
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-carbonBlack py-20 px-6 lg:px-12 relative z-10">
+        <div class="max-w-4xl mx-auto flex flex-col justify-center items-center gap-10 text-center">
+            
+            <div class="font-serif text-lg tracking-widest text-offWhite/30">
+                EL ENCUENTRO
+            </div>
+            
+            <!-- Stakeholders sin tu nombre -->
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 font-sans text-[10px] uppercase tracking-[0.15em] text-white/30">
+                <a href="#" class="hover:text-ochreAccent/80 transition-colors duration-500">Prod. La Plaza Prod</a>
+                <span class="hidden md:inline text-white/10">|</span>
+                <a href="#" class="hover:text-ochreAccent/80 transition-colors duration-500">Soporte AlmaExon</a>
+                <span class="hidden md:inline text-white/10">|</span>
+                <a href="#" class="hover:text-ochreAccent/80 transition-colors duration-500">Contravisual Media Group</a>
+            </div>
+
+            <div class="font-sans text-xs text-white/20 font-light tracking-wide">
+                © 2026. Todos los derechos reservados. Contacto: <a href="mailto:encuentro@laplazaprod.com" class="hover:text-ochreAccent/60 transition-colors">encuentro@laplazaprod.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para los efectos sensoriales e interactividad -->
+    <script>
+        // 1. Efecto Spotlight (La luz ámbar suave sigue el movimiento del mouse)
+        const glow = document.getElementById('ambient-glow');
+        document.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                // Usamos cliente X/Y para que quede fijo en la pantalla incluso al hacer scroll
+                glow.style.background = `radial-gradient(circle 600px at ${e.clientX}px ${e.clientY}px, rgba(192, 144, 77, 0.05), transparent 70%)`;
+            });
+        });
+
+        // 2. Efecto Fade-In al scrollear (Los textos aparecen como si respiraran)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 // El elemento debe estar 15% visible para activarse
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Solo se anima una vez
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+
+</body>
+</html>
