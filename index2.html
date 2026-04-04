@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Martín Tarantino · Ahora Me Elijo · La Plaza Prod</title>
+    <style>
+        /* ---------- RESET Y BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Courier New', 'Impact', 'Arial Black', 'Stencil', monospace;
+            color: #cccccc;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        /* FONDO PRINCIPAL: RUIDO ESTÁTICO + TEXTURA PAPEL PERIÓDICO */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, 
+                    rgba(0,0,0,0.1) 0px, 
+                    rgba(0,0,0,0.1) 2px, 
+                    transparent 2px, 
+                    transparent 6px),
+                url('https://www.transparenttextures.com/faces/newspaper.png');
+            background-repeat: repeat, repeat;
+            background-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        /* Capa de ruido blanco/negro animado (glitch orgánico) */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-radial-gradient(circle, rgba(255,255,255,0.05) 0px, rgba(0,0,0,0.2) 2px, transparent 3px);
+            pointer-events: none;
+            z-index: 0;
+            animation: staticNoise 0.15s steps(5) infinite;
+        }
+
+        @keyframes staticNoise {
+            0% { opacity: 0.3; transform: translate(0); }
+            10% { opacity: 0.5; transform: translate(-1%, 1%); }
+            20% { opacity: 0.2; transform: translate(1%, -1%); }
+            30% { opacity: 0.6; transform: translate(-1%, -2%); }
+            40% { opacity: 0.3; transform: translate(2%, 0); }
+            50% { opacity: 0.7; transform: translate(0, 1%); }
+            60% { opacity: 0.2; transform: translate(-2%, 2%); }
+            70% { opacity: 0.5; transform: translate(1%, -1%); }
+            80% { opacity: 0.3; transform: translate(-1%, 0); }
+            90% { opacity: 0.6; transform: translate(0, -1%); }
+            100% { opacity: 0.4; transform: translate(1%, 1%); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* ---------- TIPOGRAFÍA GRUNGE / STENCIL ---------- */
+        h1, h2, .hero h1, .plaza-badge, .credits, .links a, .description strong {
+            font-family: 'Impact', 'Stencil', 'Arial Black', 'Courier New', monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ---------- EFECTOS GLITCH PARA TITULAR ---------- */
+        .glitch-text {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: white;
+            position: relative;
+            text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,0,0,0.75);
+            animation: glitchShake 0.3s infinite alternate;
+        }
+
+        @keyframes glitchShake {
+            0% { transform: skew(0deg, 0deg); opacity: 1; text-shadow: -2px 0 red; }
+            25% { transform: skew(2deg, 1deg); text-shadow: 2px 0 red; }
+            50% { transform: skew(-1deg, -0.5deg); text-shadow: -2px 0 red; }
+            75% { transform: skew(1deg, 2deg); text-shadow: 2px 0 red; }
+            100% { transform: skew(0deg, 0deg); text-shadow: -1px 0 red; }
+        }
+
+        /* ajustes responsive */
+        @media (max-width: 700px) {
+            .glitch-text { font-size: 2rem; }
+        }
+
+        /* ---------- SECCIÓN HERO ---------- */
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #FF0000;
+            display: inline-block;
+            width: 100%;
+            padding-bottom: 0.8rem;
+            box-shadow: 0 6px 12px -8px rgba(255,0,0,0.3);
+        }
+
+        .plaza-badge {
+            font-size: 0.9rem;
+            color: #FF0000;
+            background: black;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            letter-spacing: 3px;
+            border-left: 2px solid #FF0000;
+            border-right: 2px solid #FF0000;
+            margin-top: 0.5rem;
+        }
+
+        /* ---------- WRAPPER VIDEO CON BORDE ROJO Y DISTORSIÓN HOVER ---------- */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            margin: 2.5rem 0;
+            border: 2px solid #FF0000;
+            box-shadow: 0 0 20px rgba(255,0,0,0.3);
+            transition: all 0.2s ease;
+            background: black;
+        }
+        .video-wrapper:hover {
+            filter: blur(0.6px) brightness(1.1);
+            box-shadow: 0 0 30px #FF0000;
+            border-color: #ff4444;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ---------- DESCRIPCIÓN CRUDA (texto intervenido) ---------- */
+        .description {
+            background: #050505dd;
+            backdrop-filter: blur(1px);
+            padding: 1.8rem;
+            border-left: 6px solid #FF0000;
+            margin: 2rem 0;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            word-break: break-word;
+            box-shadow: -5px 5px 0px rgba(255,0,0,0.2);
+        }
+
+        .description strong {
+            color: #FF0000;
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- CRÉDITOS AL ESTILO INDUSTRIAL ---------- */
+        .credits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px dashed #FF0000;
+            border-bottom: 1px dashed #FF0000;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .credits p {
+            color: #aaa;
+        }
+
+        /* ---------- GALERÍA DE STILLS (B/N alto contraste + efecto glitch en hover) ---------- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        .gallery-item {
+            background: #000;
+            aspect-ratio: 4 / 3;
+            border: 1px solid #333;
+            filter: grayscale(100%) contrast(180%);
+            transition: 0.2s all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #777;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            position: relative;
+        }
+        /* simulación de imagen por defecto, reemplazar con imágenes reales */
+        .gallery-item:hover {
+            filter: grayscale(80%) contrast(200%) brightness(1.2);
+            border-color: #FF0000;
+            transform: scale(0.98);
+            box-shadow: 0 0 12px red;
+            mix-blend-mode: hard-light;
+        }
+
+        /* ---------- BOTONES SOLO ROJO + EFECTO PARPADEO GLITCH ---------- */
+        .links {
+            text-align: center;
+            margin: 2.5rem 0 1rem;
+        }
+        .links a {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.7rem 1.6rem;
+            background: transparent;
+            color: #FF0000;
+            border: 2px solid #FF0000;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: 0.2s;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        .links a:hover {
+            background: #FF0000;
+            color: black;
+            text-shadow: 0 0 3px white;
+            animation: btnGlitch 0.2s steps(2) infinite;
+            box-shadow: 0 0 8px #FF0000;
+        }
+        @keyframes btnGlitch {
+            0% { transform: translate(0); opacity: 1; }
+            25% { transform: translate(-1px, 1px); opacity: 0.9; }
+            50% { transform: translate(1px, -1px); }
+            75% { transform: translate(-1px, 0); }
+            100% { transform: translate(0); }
+        }
+
+        /* efecto de distorsión aleatoria en algunos textos */
+        .distortion {
+            display: inline-block;
+            animation: textDistort 3s infinite;
+        }
+        @keyframes textDistort {
+            0%, 100% { transform: skew(0deg); opacity: 1; text-shadow: 0 0 0 red; }
+            95% { transform: skew(0deg); }
+            96% { transform: skew(5deg) translateX(2px); text-shadow: -2px 0 red; }
+            97% { transform: skew(-3deg) translateX(-1px); text-shadow: 2px 0 red; }
+            98% { transform: skew(2deg); }
+        }
+
+        /* imágenes placeholder para la galería (debes reemplazar con tus stills reales) */
+        .img-placeholder {
+            background-image: linear-gradient(45deg, #222 25%, #111 25%, #111 50%, #222 50%, #222 75%, #111 75%);
+            background-size: 20px 20px;
+            width: 100%;
+            height: 100%;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 2rem 0 1rem;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1 class="glitch-text">MARTÍN TARANTINO</h1>
+        <div class="plaza-badge">LA PLAZA PROD · CORTE INDUSTRIAL</div>
+    </div>
+
+    <!-- VIDEO EMBEBIDO (iframe proporcionado por el usuario) -->
+    <div class="video-wrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Y7ZHmNGpxaM?si=fuewu_PgBlUAEfAD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <!-- DESCRIPCIÓN SEGÚN TUS APORTES -->
+    <div class="description">
+        <strong>「 AHORA ME ELIJO · MANIFIESTO VISUAL 」</strong>
+        <span class="distortion">➤ HAMBRE Y SED DE JUSTICIA ➤</span><br><br>
+        Monocromía violenta, rojo carmesí en los pómulos. El papel periódico empapela la escena, 
+        las palabras “VERTIDO”, “TRAICIÓN”, “LLANTO” se incrustan en la piel de la remera. 
+        Simetrías caleidoscópicas deforman el rostro en un test de Rorschach viviente. 
+        La furia contenida explota en el estribillo: <span style="color:#FF0000; font-weight:bold;">“Y AHORA ME ELIJO”</span>, 
+        mientras los glitches astillan la pantalla y los papeles vuelan en cámara lenta. 
+        Bienvenidos al costado B de <strong>La Plaza Prod</strong>.
+    </div>
+
+    <!-- CRÉDITOS TIPO INDUSTRIA PESADA -->
+    <div class="credits">
+        <p>★ MARTÍN TARANTINO · VOZ Y PRESENCIA<br>★ DIRECCIÓN & POSTPRODUCCIÓN: LA PLAZA PROD<br>★ FOTOGRAFÍA: [CRÉDITO] · MONTAJE GLITCH: [CRÉDITO]</p>
+        <p>★ ESTÉTICA: SIN CITY / NINE INCH NAILS<br>★ UNA PRODUCCIÓN · MMXXV · LA PLAZA PROD ★</p>
+    </div>
+
+    <!-- GALERÍA DE STILLS (en B/N alto contraste, reemplazar las imágenes reales) -->
+    <h2 style="color:#FF0000; margin-top: 2rem; border-left: 3px solid red; padding-left: 12px;">◉ FOTOGRAMAS CLAVE</h2>
+    <div class="gallery">
+        <div class="gallery-item" style="background-image: url('https://placehold.co/400x300/111/white?text=ROSTRO+ROJO'); background-size: cover;">[STILL 01]</div>
+        <div class="gallery-item" style="background-image: url('https://placehold.co/400x300/111/white?text=CALEIDOSCOPIO'); background-size: cover;">[STILL 02]</div>
+        <div class="gallery-item" style="background-image: url('https://placehold.co/400x300/111/white?text=PAPEL+PERIODICO'); background-size: cover;">[STILL 03]</div>
+        <div class="gallery-item" style="background-image: url('https://placehold.co/400x300/111/white?text=GLITCH+FURIA'); background-size: cover;">[STILL 04]</div>
+    </div>
+
+    <!-- BOTONES ROJOS CON EFECTO GLITCH / PARPADEO -->
+    <div class="links">
+        <a href="#" target="_blank">INSTAGRAM</a>
+        <a href="#" target="_blank">SPOTIFY</a>
+        <a href="#" target="_blank">BANDCAMP</a>
+        <a href="#" target="_blank">LA PLAZA PROD</a>
+        <a href="#" target="_blank">CONTACTO / PRENSA</a>
+    </div>
+    <footer>
+        LA PLAZA PROD · 2025 · MARTIN TARANTINO "AHORA ME ELIJO" <br>
+        VISIÓN DISTÓPICA · TODOS LOS DERECHOS DE DISTORSIÓN RESERVADOS
+    </footer>
+</div>
+</body>
+</html>
